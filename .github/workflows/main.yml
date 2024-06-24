@@ -32,10 +32,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.BUILD_SECRET }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name:  ${{ github.event.inputs.release_version }}
-          release_name: ${{ github.event.inputs.release_title }}
-          draft: ${{ github.event.inputs.draft }}
-          prerelease: ${{ github.event.inputs.prerelease }}
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
       - uses: actions/checkout@latest
       - name: Archive Release
         uses: thedoctor0/zip-release@latest
@@ -47,4 +51,4 @@ jobs:
         uses: ncipollo/release-action@v1.12.0
         with:
           artifacts: "release.zip"
-            token: ${{ secrets.BUILD_SECRET }}
+          token: ${{ secrets.BUILD_SECRET }}
