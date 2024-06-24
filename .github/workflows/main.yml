@@ -40,9 +40,9 @@ jobs:
             - Second Change
           draft: false
           prerelease: false
-      - uses: actions/checkout@latest
+      - uses: actions/checkout@v4
       - name: Archive Release
-        uses: thedoctor0/zip-release@latest
+        uses: thedoctor0/zip-release@0.7.6
         with:
           type: 'zip'
           filename: 'release.zip'
@@ -52,3 +52,4 @@ jobs:
         with:
           artifacts: "release.zip"
           token: ${{ secrets.BUILD_SECRET }}
+
