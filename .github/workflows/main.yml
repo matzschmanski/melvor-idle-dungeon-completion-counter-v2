@@ -25,24 +25,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@latest
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          GITHUB_TOKEN: ${{ secrets.BUILD_SECRET }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: false
-          prerelease: false
-      - uses: actions/checkout@master
+          tag_name:  ${{ github.event.inputs.release_version }}
+          release_name: ${{ github.event.inputs.release_title }}
+          draft: ${{ github.event.inputs.draft }}
+          prerelease: ${{ github.event.inputs.prerelease }}
+      - uses: actions/checkout@latest
       - name: Archive Release
-        uses: thedoctor0/zip-release@0.7.5
+        uses: thedoctor0/zip-release@latest
         with:
           type: 'zip'
           filename: 'release.zip'
@@ -51,4 +47,4 @@ jobs:
         uses: ncipollo/release-action@v1.12.0
         with:
           artifacts: "release.zip"
-          token: ${{ secrets.GITHUB_TOKEN }}
+            token: ${{ secrets.BUILD_SECRET }}
