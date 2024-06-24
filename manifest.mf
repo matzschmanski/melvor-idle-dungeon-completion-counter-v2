@@ -1,0 +1,6 @@
+{
+  "namespace": "dungeon-completion-counter",
+  "icon": "assets/icon.png",
+  "setup": "src/setup.mjs",
+  "load": ["assets/style.css"]
+}
