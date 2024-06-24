@@ -14,11 +14,11 @@ on:
       draft:
         description: 'Create as draft'
         required: false
-        default: 'false'
+        default: 'true'
       prerelease:
         description: 'Mark as prerelease'
         required: false
-        default: 'false'
+        default: 'true'
 
 jobs:
   create_release:
@@ -32,14 +32,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.BUILD_SECRET }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: false
-          prerelease: false
+          tag_name: ${{ github.event.inputs.release_version }}
+          release_name: ${{ github.event.inputs.release_title }}
+          draft: ${{ github.event.inputs.draft }}
+          prerelease: ${{ github.event.inputs.prerelease }}
       - uses: actions/checkout@v4
       - name: Archive Release
         uses: thedoctor0/zip-release@0.7.6
