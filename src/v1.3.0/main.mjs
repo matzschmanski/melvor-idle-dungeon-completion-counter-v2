@@ -1,10 +1,17 @@
 export function setup(ctx) {
-    const id = 'dungeon-completion-counter';
+    const id = 'DCCV2';
     const title = 'Dungeon Completion Counter';
     //game.combat.player.manager.getDungeonCompleteCount(game.dungeons.registeredObjects.get('melvorTotH:Underground_Lava_Lake'))
+
+    const debugLog = (...msg) => {
+        console.log(`[${id}] `, ...msg);
+    }
+
     ctx.onInterfaceReady(async (ctx) => {
+        debugLog('loading...');
         loadDefaultDungeonCompletionCounts();
         updateDungeonCompletionCounts();
+        debugLog('loaded');
     });
 
     ctx.patch(CombatManager, 'setDungeonCompleteCount').after(() => {
