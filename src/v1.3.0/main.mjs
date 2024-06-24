@@ -1,8 +1,6 @@
 export function setup(ctx) {
     const id = 'DCCV2';
     const title = 'Dungeon Completion Counter';
-    //game.combat.player.manager.getDungeonCompleteCount(game.dungeons.registeredObjects.get('melvorTotH:Underground_Lava_Lake'))
-
     const debugLog = (...msg) => {
         console.log(`[${id}] `, ...msg);
     }
@@ -49,5 +47,6 @@ export function setup(ctx) {
         }else{
             kcElement.innerHTML = '<small>Times completed: ' + kc + '</small>';
         }
+        debugLog('set dungeon completion count text for dungeon: ' + dungeon + ' to ' + kc);
     }
 }
