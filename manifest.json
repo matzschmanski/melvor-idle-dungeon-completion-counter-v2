@@ -1,0 +1,4 @@
+{
+  "namespace": "dungeon-completion-counter",
+  "setup": "src/setup.mjs",
+}
